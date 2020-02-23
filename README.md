@@ -75,3 +75,9 @@ gradle-multi-module
                                   加载所依赖的module的所有配置
 
 ```
+
+### 依赖关系
+![依赖关系](https://img-blog.csdnimg.cn/20200223141809491.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0F4ZWxhMzBX,size_16,color_FFFFFF,t_70)
+
+### 加载结果
+![加载结果](https://img-blog.csdnimg.cn/20200223141830893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0F4ZWxhMzBX,size_16,color_FFFFFF,t_70)
