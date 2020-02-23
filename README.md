@@ -25,8 +25,8 @@ gradle-multi-module
 │      │  │                      CommonUtil.java 注入application-common.yml中的String参数并打印(其他module同理)
 │      │  └─resources
 │      │      │  application-common.yml 配置一个String参数(其他module同理)，测试Spring容器的启动和Bean加载情况。
-│      │      │  application.yml 单独运行common module时会激活这个配置文件，其他module同理。
-                                不指定激活哪个配置文件时Springboot默认寻找application.yml或application-bootstrap.yml
+│      │      │  application.yml 单独运行common module时会激活这个配置文件，其他module同理。不指定激活哪个配
+                                置文件时Springboot默认寻找application.yml或application-bootstrap.yml
 ├─user
 │  │  build.gradle compile project(":common") 配置依赖关系(其他module同理)，依赖关系见下图
 │  └─src
