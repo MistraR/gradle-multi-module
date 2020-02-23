@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: common
+server:
+  port: 8081
+logging:
+  level:
+    root: info

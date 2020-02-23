@@ -1,0 +1,5 @@
+rootProject.name = 'gradle-multi-module'
+
+//这里include的顺序要注意顺序，被依赖的放在前面，因为gradle打包时是按照顺序依赖的。不然可能会出现有些jar包没打进去
+include 'common','user','log-merge','work-order'
+

@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: common,user
+server:
+  port: 8082

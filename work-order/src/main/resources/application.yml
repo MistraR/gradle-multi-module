@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: common,user,log-merge,work-order
+server:
+  port: 8084

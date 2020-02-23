@@ -1,0 +1,65 @@
+group 'org.gradle'
+version '1.0-SNAPSHOT'
+
+//声明gradle脚本自身需要使用的资源,优先执行
+buildscript {
+    ext {
+        springBootVersion = '2.1.5.RELEASE'
+    }
+    repositories {
+        maven { url = 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+//所有项目共享的配置
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java-library'
+    version = '1.0'
+    //jdk版本
+    sourceCompatibility = 11
+    targetCompatibility = 11
+}
+
+//根项目上采用配置注入的方式定义一些公共配置。根项目就像一个容器，子项目会迭代访问它的配置并注入到自己的配置中。
+//所有子模块共享的配置
+subprojects {
+    version = '1.0'
+    //声明java插件
+    //Gradle默认会从src/main/java 搜寻打包源码，在src/test/java下搜寻测试源码。
+    //并且src/main/resources下的所有文件按都会被打包，所有src/test/resources下的文件都会被添加到类路径用以执行测试。
+    //所有文件都输出到build下，打包的文件输出到build/libs下。
+    apply plugin: 'java'
+    //使用springboot插件
+    apply plugin: 'org.springframework.boot'
+    //java编译的时候缺省状态下会因为中文字符而失败
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+    //配置所有子模块的依赖仓库地址
+    repositories {
+        maven { url = 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+    //所有子模块共有依赖
+    dependencies{
+        //implementation是取代之前的compile的，通过implementation依赖的库只能自己库本身访问，
+        //举个例子，A依赖B，B依赖C，如果B依赖C是使用的implementation依赖，那么在A中是访问不到C中的方法的，
+        //implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        //testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+}
+//编译时控制台乱码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+//在Gradle中jar包通常被发布到某个仓库中。下面将jar包发布到本地目录。也可以发布到远程仓库或多个远程仓库中。
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
